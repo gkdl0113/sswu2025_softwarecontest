@@ -7,7 +7,7 @@
 __pycache__/
 
 # === Django ===
-
+.env
 .env.local
 .env.development
 .env.production
@@ -16,7 +16,7 @@ db.sqlite3
 db.sqlite3-journal
 /media/
 /staticfiles/
-.env
+
 
 # === Editor / OS ===
 .vscode/
