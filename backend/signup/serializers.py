@@ -1,17 +1,7 @@
+# signup/serializers.py
 from rest_framework import serializers
-from django.contrib.auth.models import User
 
-class UserSignupSerializer(serializers.ModelSerializer):
+class SignupSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=150)
     password = serializers.CharField(write_only=True)
-
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password']
-
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            password=validated_data['password']
-        )
-        return user
+    # 실제 회원가입 연동은 이후 단계에서 이어서 구현; 지금은 메일 인증 흐름만 먼저 테스트
