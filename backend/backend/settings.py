@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'signup',
+    
 ]
 
 MIDDLEWARE = [
@@ -118,5 +120,20 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # .env 파일 불러오기
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.naver.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+EMAIL_HOST_USER = 'eggta3500@naver.com'
+EMAIL_HOST_PASSWORD = 'TDT8M2Z1DB2K'
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
