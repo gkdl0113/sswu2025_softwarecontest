@@ -25,4 +25,9 @@ export const signup = async (username, email, password, confirmPassword) => {
   }
 };
 
-// 로그인, ID찾기, 비번찾기도 여기에 추가
+export async function checkIdDuplicate(username) {
+  const response = await client.get(`/check-id`, {
+    params: { username }
+  });
+  return response.data; // { available: true/false }
+}

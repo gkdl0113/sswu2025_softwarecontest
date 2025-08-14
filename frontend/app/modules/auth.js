@@ -40,13 +40,44 @@ export const register = createAsyncThunk(
   }
 );
 
+export const findpw = createAsyncThunk(
+  "auth/findpw",
+  async ({ id, email }, { rejectWithValue }) => {
+    try { 
+      const res = await loginAPI(id, email);
+      const token = res.data.token;
+      await AsyncStorage.setItem("token", token);
+      return {...res.data, token};
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.message || "인증 실패");
+    }
+  }
+);
+
+export const findid = createAsyncThunk(
+  "auth/findid",
+  async ({ email}, { rejectWithValue }) => {
+    try { 
+      const res = await loginAPI(id, email);
+      const token = res.data.token;
+      await AsyncStorage.setItem("token", token);
+      return {...res.data, token};
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.message || "인증 실패");
+    }
+  }
+);
+
 const initialState = {
   login: { id: "", password: "" },
   register: { id: "", email: "", password: "", confirmPassword: "" },
+  findpw: {id: "", email: ""},
+  findid: {email: ""},
   user: null,
   isLoggedIn: false,
   loading: false,
   error: null,
+  idAvailable: null,
 };
 
 const authSlice = createSlice({

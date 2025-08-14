@@ -33,8 +33,10 @@ export default function RootLayout() {
       <Initializer />
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
+          <Stack.Screen name="pages/SignUpPage" options={{ headerShown: false }} />
+          <Stack.Screen name="pages/LoginPage" options={{ headerShown: false }} />
+          <Stack.Screen name="pages/FindIdPage" options={{ headerShown: false }} />
+          <Stack.Screen name="pages/FindPasswordPage" options={{ headerShown: false }} />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>

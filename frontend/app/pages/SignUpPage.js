@@ -23,19 +23,19 @@ import { signup } from "../../lib/api/auth";
 const { height } = Dimensions.get("window");
 
 export default function SignUpPage() {
-  const slideAnim = useRef(new Animated.Value(height * 0.2)).current;
+  const slideAnim = useRef(new Animated.Value(height * 0.15)).current;
   const [form, setForm] = useState({ id: "", email: "", password: "", confirmPassword: "" });
   const router = useRouter();
 
   useFocusEffect(
     useCallback(() => {
-      slideAnim.setValue(height * 0.2);
+      slideAnim.setValue(height * 0.15);
     }, [slideAnim])
   );
 
   const hideSignUp = () => {
     Animated.spring(slideAnim, {
-      toValue: height * 0.4,
+      toValue: height * 0.35,
       friction: 7,
       tension: 60,
       useNativeDriver: true
@@ -51,8 +51,6 @@ export default function SignUpPage() {
     console.log("회원가입 데이터:", form);
 
     try {
-      console.log("회원가입 데이터:", form);
-
       await signup(
         form.id,
         form.email,
@@ -112,7 +110,7 @@ export default function SignUpPage() {
           <Text style={{ marginLeft: 6 }}>Back</Text>
         </TouchableOpacity>
       </View>
-      <Animated.View style={{ transform: [{ translateY: slideAnim }], flex: 1 }}>
+      <Animated.View style={{ transform: [{ translateY: slideAnim }], flex: 1}}>
         <KeyboardAvoidingView
           style={{ flex: 1 }}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -145,4 +143,4 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center"
   }
-});
+}); 

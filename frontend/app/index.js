@@ -1,10 +1,35 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+// app/index.js
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { useRouter } from 'expo-router';
 
-export default function App() {
+export default function Sitemap() {
+  const router = useRouter();
+
+  const pages = [
+    { name: '회원가입 페이지', path: '/pages/SignUpPage' },
+    { name: '로그인 페이지', path: '/pages/LoginPage' },
+    // 필요하면 여기에 계속 추가
+  ];
+
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>내가 만든 기본 페이지</Text>
-    </View>
+    <ScrollView contentContainerStyle={{ padding: 20 }}>
+      <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>
+        페이지 목록
+      </Text>
+      {pages.map((page) => (
+        <TouchableOpacity
+          key={page.path}
+          style={{
+            padding: 15,
+            backgroundColor: '#eee',
+            borderRadius: 5,
+            marginBottom: 10,
+          }}
+          onPress={() => router.push(page.path)}
+        >
+          <Text>{page.name}</Text>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
   );
 }

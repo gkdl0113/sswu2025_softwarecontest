@@ -1,4 +1,3 @@
-// components/auth/AuthTemplate.js
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import styled from "styled-components/native";
 
@@ -8,6 +7,8 @@ const AuthTemplateBlock = styled.View`
   padding: 24px;
   border-top-left-radius: 60px;
   border-top-right-radius: 60px;
+  margin-top: 24px;
+  elevation: 12;
 `;
 
 export default function AuthTemplate({ children }) {
