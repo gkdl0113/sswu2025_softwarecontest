@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>새 글 작성</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'match/style.css' %}">
+</head>
+<body class="container">
+  <nav class="breadcrumb"><a href="{% url 'post_list' %}">← 목록으로</a></nav>
+
+  <h1>새 글 작성</h1>
+  <form class="card" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn" type="submit">등록</button>
+  </form>
+
+  <script src="{% static 'match/script.js' %}"></script>
+</body>
+</html>

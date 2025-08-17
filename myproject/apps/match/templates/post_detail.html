@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>{{ post.title }}</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'match/style.css' %}">
+</head>
+<body class="container">
+  <nav class="breadcrumb"><a href="{% url 'post_list' %}">← 목록으로</a></nav>
+
+  <article class="post">
+    <h1>{{ post.title }}</h1>
+    <p class="menu">먹고 싶은 메뉴: <b>{{ post.menu }}</b></p>
+    <div class="content">{{ post.content|linebreaks }}</div>
+    <p class="meta">작성자: {{ post.author.username }} · {{ post.created_at|date:"Y-m-d H:i" }}</p>
+  </article>
+
+  <section class="comments">
+    <h2>댓글</h2>
+    <ul class="comment-list">
+      {% for c in post.comments.all %}
+        <li class="comment">
+          <b>{{ c.author.username }}</b>
+          <span class="meta">{{ c.created_at|date:"Y-m-d H:i" }}</span>
+          <div>{{ c.content|linebreaks }}</div>
+        </li>
+      {% empty %}
+        <li class="empty">첫 댓글을 남겨보세요.</li>
+      {% endfor %}
+    </ul>
+
+    {% if user.is_authenticated %}
+      <form id="comment-form" class="card" method="post" action="{% url 'post_detail' post.pk %}">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button class="btn" type="submit">댓글 작성</button>
+      </form>
+    {% else %}
+      <p class="muted">댓글을 남기려면 <a href="/login/">로그인</a>이 필요합니다.</p>
+    {% endif %}
+  </section>
+
+  <script src="{% static 'match/script.js' %}"></script>
+</body>
+</html>
